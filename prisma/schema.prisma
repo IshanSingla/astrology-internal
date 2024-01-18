@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int      @id @default(autoincrement())
+  name            String
+  mobile_number   String
+  whatsapp_number String
+  dob             DateTime
+  place_of_birth  PlaceOfBirth
+  series_number   Int
+}
+
+model PlaceOfBirth {
+  id       Int    @id @default(autoincrement())
+  district String
+  state    String
+  city     String
+  User     User[]
+}
