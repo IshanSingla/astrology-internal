@@ -3,9 +3,9 @@ import { OAuth2Client } from 'google-auth-library';
 import { User } from '../types';
 
 // TODO: Load your OAuth2 credentials from a secure place
-const YOUR_CLIENT_ID = 'your-client-id';
-const YOUR_CLIENT_SECRET = 'your-client-secret';
-const YOUR_REDIRECT_URL = 'your-redirect-url';
+const YOUR_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const YOUR_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const YOUR_REDIRECT_URL = process.env.GOOGLE_REDIRECT_URL;
 
 // Scopes for the People API
 const SCOPES = ['https://www.googleapis.com/auth/contacts'];
@@ -20,8 +20,8 @@ const oauth2Client = new OAuth2Client(
 // TODO: Retrieve and set the user's access and refresh tokens
 // This usually comes from your application's database after the user has authenticated
 oauth2Client.setCredentials({
-    access_token: 'user-access-token',
-    refresh_token: 'user-refresh-token'
+    access_token: process.env.GOOGLE_ACCESS_TOKEN,
+    refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
 });
 
 // Function to get authenticated People API client

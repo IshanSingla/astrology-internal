@@ -24,7 +24,7 @@ export const createUser = async (req: Request, res: Response) => {
         const message = {
             notification: {
                 title: 'New User Added',
-                body: user.id??'',
+                body: user.id ?? '',
             },
             topic: 'users' // or you can use a specific device token
         };
@@ -39,7 +39,11 @@ export const createUser = async (req: Request, res: Response) => {
 
         res.json(user);
     } catch (error) {
-        res.status(500).send(error.message);
+        const errorMessage = (error as Error).message;
+        console.error('An error occurred:', errorMessage);
+        res.status(500).send({
+            error: errorMessage,
+        });
     }
 };
 
@@ -52,7 +56,11 @@ export const getAllUsers = async (req: Request, res: Response) => {
         });
         res.json(users);
     } catch (error) {
-        res.status(500).send(error.message);
+        const errorMessage = (error as Error).message;
+        console.error('An error occurred:', errorMessage);
+        res.status(500).send({
+            error: errorMessage,
+        });
     }
 };
 
@@ -71,7 +79,11 @@ export const getUserById = async (req: Request, res: Response) => {
             res.status(404).send('User not found');
         }
     } catch (error) {
-        res.status(500).send(error.message);
+        const errorMessage = (error as Error).message;
+        console.error('An error occurred:', errorMessage);
+        res.status(500).send({
+            error: errorMessage,
+        });
     }
 };
 
@@ -97,7 +109,11 @@ export const updateUser = async (req: Request, res: Response) => {
         await createContact(userData);
         res.json(user);
     } catch (error) {
-        res.status(500).send(error.message);
+        const errorMessage = (error as Error).message;
+        console.error('An error occurred:', errorMessage);
+        res.status(500).send({
+            error: errorMessage,
+        });
     }
 };
 
@@ -109,6 +125,10 @@ export const deleteUser = async (req: Request, res: Response) => {
         });
         res.json(user);
     } catch (error) {
-        res.status(500).send(error.message);
+        const errorMessage = (error as Error).message;
+        console.error('An error occurred:', errorMessage);
+        res.status(500).send({
+            error: errorMessage,
+        });
     }
 };
